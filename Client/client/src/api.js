@@ -3,9 +3,10 @@ import axios from "axios";
 const API = axios.create({
   baseURL: "http://localhost:5000/api",
   headers: {
-    'Content-Type': 'application/json',  // Ensure all requests are sent with the correct content-type
+    'Content-Type': 'application/json', 
   }
 });
+axios.defaults.withCredentials = true;
 
 API.interceptors.request.use((req) => {
   const user = JSON.parse(localStorage.getItem("user"));

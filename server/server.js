@@ -10,7 +10,14 @@ const authRoutes = require('./routes/authRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "      ",
+    methods: ["POST", "GET", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
