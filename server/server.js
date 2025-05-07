@@ -12,7 +12,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const app = express();
 app.use(
   cors({
-    origin: "      ",
+    origin: "https://nomads-jewelry-shopping-website-front.vercel.app",
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
