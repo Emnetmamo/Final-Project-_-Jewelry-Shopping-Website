@@ -1,0 +1,94 @@
+.signup-page {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .signup-left,
+  .signup-right {
+    flex: 1;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .signup-left {
+    background-image: url('../images/jewelry-left.jpg');
+  }
+  
+  .signup-right {
+    background-image: url('../images/jewelry-right.jpg');
+  }
+  
+  .signup-form-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .signup-card {
+    background-color: #fff;
+    padding: 2rem;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .signup-card h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .input-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-group input {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+  }
+  
+  .input-group span {
+    width: 50px;
+    text-align: center;
+  }
+  
+  .signup-btn {
+    border-color: #4f3e06;
+    box-shadow: 0 0 5px rgba(56, 48, 23, 0.5);
+    color: #191818;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .signup-btn:hover {
+    border-color: #4a3a07;
+    box-shadow: 0 0 5px rgba(28, 22, 1, 0.5);
+  }
+  
+  .signup-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  .signup-footer a {
+    color: #715804;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .signup-footer a:hover {
+    color: #191918;
+  }
+  

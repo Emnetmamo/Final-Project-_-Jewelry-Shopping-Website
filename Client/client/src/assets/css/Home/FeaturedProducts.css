@@ -1,0 +1,44 @@
+.featured-products {
+    padding: 40px 0;
+    margin-top: -50px;
+  }
+  
+  .product-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .product-item {
+    margin: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .product-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .product-image {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-name {
+    margin-top: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .product-price {
+    margin-top: 5px;
+    color: #888;
+  }
+  
+  .btn{
+    border-radius: 5px;
+    color: "goldenrod";
+     border-color: "goldenrod";
+  }

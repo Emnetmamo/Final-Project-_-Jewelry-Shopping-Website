@@ -1,0 +1,32 @@
+.user-navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .user-navbar .navbar-left .logo-img {
+    width: 120px;
+  }
+  
+  .user-navbar .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-navbar .navbar-right .username {
+    margin-right: 20px;
+  }
+  
+  .user-navbar .navbar-right .btn {
+    color: white;
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .user-navbar .navbar-right .btn:hover {
+    text-decoration: underline;
+  }
+  

@@ -1,0 +1,47 @@
+.newsletter-signup {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #000; 
+    color: #9c8500; 
+  }
+  
+  .newsletter-signup h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  .newsletter-signup p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  input {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  button {
+    background-color: #e0b90ad2; 
+    color: #f8f8f8; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #ffdb3bd2;
+  }
+  

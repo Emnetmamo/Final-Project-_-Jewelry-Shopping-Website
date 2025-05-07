@@ -1,0 +1,40 @@
+.call-to-action {
+    text-align: center;
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
+    margin-top: -60px;
+  }
+  
+  .cta-background {
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    transition: background-image 1s ease-in-out;
+  }
+  
+  .cta-image-1 { background-image: url('../../images/slide1.jpg'); }
+  .cta-image-2 { background-image: url('../../images/slide2.jpg'); }
+  .cta-image-3 { background-image: url('../../images/slide3.jpg'); }
+  .cta-image-4 { background-image: url('../../images/slide4.jpg'); }
+  .cta-image-5 { background-image: url('../../images/slide5.jpg'); }
+  
+  .cta-button {
+    background-color: #fff;
+    color: #917229;
+    font-size: 1.5em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    /* margin-top: 150px; */
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .cta-button:hover {
+    background-color: #917229;
+    color: #fff;
+  }
+  

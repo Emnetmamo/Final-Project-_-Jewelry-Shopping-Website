@@ -1,0 +1,189 @@
+.container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.table thead {
+  background-color: #bfa046;
+  color: #fff;
+}
+
+.table th, .table td {
+  padding: 20px 30px;
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+
+.table th {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  text-align: center;
+}
+
+.table tbody tr {
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.table tbody tr:hover {
+  background-color: #f9f9f9;
+  transform: scale(1.02);
+  transition: 0.3s ease;
+}
+
+.table td {
+  text-align: center;
+  padding: 20px;
+}
+
+
+.btn {
+  font-size: 14px;
+  padding: 8px 15px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.btn-success {
+  background-color: #0f3919;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #227637;
+}
+
+.btn-primary {
+  background-color: #09243f;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #214e7f;
+}
+
+.btn-danger {
+  background-color: #33090d;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #67141c;
+}
+
+.btn-sm .fa {
+  font-size: 18px;
+}
+
+.table td .action-buttons {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  gap: 10px; 
+}
+
+.action-buttons .btn {
+  width: 100%; 
+}
+
+
+.badge {
+  font-size: 14px;
+  font-weight: normal;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.badge-warning {
+  background-color: #f39c12;
+  color: #fff;
+}
+
+.badge-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.fw-semibold {
+  font-weight: 600;
+}
+
+
+.table .btn .fa {
+  font-size: 18px;
+}
+
+
+.table tbody tr td {
+  text-align: center;
+  padding: 30px;
+  color: #6c757d;
+}
+
+.table .table-responsive {
+  margin-top: 30px;
+}
+
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #bfa046;
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+
+@media (max-width: 767px) {
+  .table td, .table th {
+    padding: 10px 15px;
+  }
+
+  .table th {
+    font-size: 14px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+  top: 20%;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}

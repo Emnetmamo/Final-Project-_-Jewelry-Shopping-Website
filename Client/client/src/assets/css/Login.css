@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap');
+
+.login-page {
+  display: flex;
+  height: 100vh;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fefefe;
+}
+
+.login-left,
+.login-right {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+}
+
+.login-left {
+  background-image: url('../images/jewelry-left.jpg');
+}
+
+.login-right {
+  background-image: url('../images/jewelry-right.jpg');
+}
+
+.login-form-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(to right, #fffdf5, #f9f6f1);
+}
+
+.login-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #333;
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.input-group:focus-within {
+  border-color: #D4AF37;
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+}
+
+.input-group-text {
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border: none;
+  border-right: 1px solid #ccc;
+  color: #777;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  border: none;
+  padding: 0.75rem;
+  font-size: 16px;
+  flex: 1;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+.btn-dark {
+  background-color: #333;
+  border-radius: 10px;
+  border: none;
+  padding: 12px;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s ease;
+  margin-left: 130px;
+  
+}
+
+.btn-dark:hover {
+  background-color: #D4AF37;
+  color: #000;
+}
+
+.btn-outline-dark {
+  border-radius: 10px;
+  padding: 10px 16px;
+  border: 1px solid #333;
+  color: #333;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  background-color: transparent;
+}
+
+.btn-outline-dark:hover {
+  background-color: #D4AF37;
+  border-color: #D4AF37;
+  color: #000;
+}
+
+.text-muted {
+  font-size: 14px;
+  color: #777;
+  margin-top: 15px;
+}
