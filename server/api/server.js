@@ -9,28 +9,31 @@ const orderRoutes = require('../routes/orderRoutes');
 
 const app = express();
 
-// MongoDB URI directly as a string
+// MongoDB URI directly as a string (use the correct URI)
 const MONGO_URI = 'mongodb+srv://Mentalist:Jane1234@cluster0.mwjjyjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
-// Check if the database is already connected
-if (mongoose.connection.readyState === 0) {
-  console.log('MongoDB is not connected. Establishing a connection...');
-  
-  mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000, // Timeout for server connection (5 seconds)
-  })
-  .then(() => {
-    console.log('MongoDB connected successfully.');
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err);
+// Function to handle MongoDB connection
+const connectDB = async () => {
+  try {
+    if (mongoose.connection.readyState === 0) {
+      console.log('Connecting to MongoDB...');
+      await mongoose.connect(MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000, // Timeout for server connection (5 seconds)
+      });
+      console.log('MongoDB connected successfully.');
+    } else {
+      console.log('MongoDB is already connected.');
+    }
+  } catch (error) {
+    console.error('MongoDB connection failed:', error);
     process.exit(1); // Exit if MongoDB connection fails
-  });
-} else {
-  console.log('MongoDB is already connected.');
-}
+  }
+};
+
+// Establish connection when the server starts
+connectDB();
 
 // CORS configuration
 app.use(
