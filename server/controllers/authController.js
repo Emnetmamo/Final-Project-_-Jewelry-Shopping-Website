@@ -44,7 +44,7 @@ exports.signup = async (req, res) => {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
   
-      const token = jwt.sign({ id: user._id }, 'supersecretkey', { expiresIn: '1d' });
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'supersecretkey', { expiresIn: '1d' });
   
       return res.json({ token, user: { id: user._id, username: user.username } });
   
