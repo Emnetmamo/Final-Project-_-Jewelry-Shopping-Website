@@ -6,47 +6,50 @@ const serverless = require('serverless-http');
 
 const MONGO_URI = 'mongodb+srv://Mentalist:Jane1234@cluster0.mwjjyjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
+const authRoutes = require('../routes/authRoutes');
+const orderRoutes = require('../routes/orderRoutes');
+
 const app = express();
 
-// DB connect
+
+let isConnected = false;
 const connectDB = async () => {
-  if (mongoose.connection.readyState === 1) return; // already connected
+  if (isConnected || mongoose.connection.readyState === 1) {
+    return;
+  }
   try {
     console.log('Connecting to MongoDB...');
-    await mongoose.connect(MONGO_URI);
+    await mongoose.connect(MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    isConnected = true;
     console.log('MongoDB connected successfully.');
   } catch (err) {
-    console.error('MongoDB connection failed:', err);
+    console.error('MongoDB connection error:', err);
     throw err;
   }
 };
 
+// Middleware
 app.use(
   cors({
-    origin: ["https://nomads-jewelry-shopping-website-front.vercel.app"],
-    methods: ["POST", "GET", "DELETE", "PUT"],
+    origin: ['https://nomads-jewelry-shopping-website-front.vercel.app'],
+    methods: ['POST', 'GET', 'DELETE', 'PUT'],
     credentials: true,
   })
 );
 
 app.use(express.json());
 
-// Basic test route
+
 app.get('/', async (req, res) => {
-  try {
-    await connectDB();
-    res.status(200).send('MongoDB connected and server is live!');
-  } catch (err) {
-    res.status(500).send('Failed to connect to MongoDB.');
-  }
+  connectDB().catch(console.error); 
+  res.send('Hello! Server is running. MongoDB connection will initialize if not yet connected.');
 });
 
-// Routes
-const authRoutes = require('../routes/authRoutes');
-const orderRoutes = require('../routes/orderRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Export serverless handler
 module.exports = serverless(app);
