@@ -25,7 +25,7 @@ app.use('/api/orders', orderRoutes);
 
 // Hello route for testing deployment
 app.get('/', (req, res) => {
-  res.send('Hello, deployed successfully!');
+  res.send('Hello there, deployed successfully!');
 });
 
 const PORT = process.env.PORT || 5000;
