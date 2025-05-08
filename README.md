@@ -68,3 +68,7 @@ Frontend: React, Bootstrap
 Backend: Node.js, Express, MongoDB
 
 Authentication: JWT
+
+If you want to check out the final work please click below :)
+Wesite Link - https://nomads-jewelry-shopping-website-front.vercel.app/
+Demo Video - https://www.youtube.com/watch?v=yXJAPIbcyFQ
