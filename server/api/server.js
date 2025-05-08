@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -12,6 +11,24 @@ const orderRoutes = require('../routes/orderRoutes');
 
 const app = express();
 
+// MongoDB connection flag
+let isConnected = false;
+
+// Middleware to connect to DB before handling any route
+app.use(async (req, res, next) => {
+  if (!isConnected) {
+    try {
+      await connectDB();
+      isConnected = true;
+      console.log("MongoDB connected");
+    } catch (err) {
+      console.error('MongoDB connection failed:', err);
+      return res.status(500).send('MongoDB connection failed');
+    }
+  }
+  next();
+});
+
 app.use(
   cors({
     origin: ["https://nomads-jewelry-shopping-website-front.vercel.app"],
@@ -22,32 +39,12 @@ app.use(
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('Hello, deployed successfully!');
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 
-app.get('/', async (req, res) => {
-  try {
-    res.send('Hello, deployed successfully!');
-  } catch (err) {
-    console.error('Error in root route:', err);
-    res.status(500).send('Something went wrong.');
-  }
-});
-
-// Only connect when invoked
-let isConnected = false;
-
-app.use(async (req, res, next) => {
-  if (!isConnected) {
-    try {
-      await connectDB();
-      isConnected = true;
-    } catch (err) {
-      console.error('MongoDB connection failed:', err);
-      return res.status(500).send('MongoDB connection failed');
-    }
-  }
-  next();
-});
-
+// Export serverless handler
 module.exports = serverless(app);
