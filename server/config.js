@@ -1,3 +1,4 @@
+// server/config.js
 const mongoose = require('mongoose');
 
 let isConnected = false;
@@ -5,18 +6,11 @@ let isConnected = false;
 const connectDB = async () => {
   if (isConnected) {
     console.log("Reusing MongoDB connection");
-    return; 
+    return;
   }
 
   try {
-    const options = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    };
-
-    await mongoose.createConnection(process.env.MONGO_URI, options);
+    await mongoose.connect(process.env.MONGO_URI); 
     isConnected = true;
     console.log("MongoDB connected successfully");
   } catch (error) {
