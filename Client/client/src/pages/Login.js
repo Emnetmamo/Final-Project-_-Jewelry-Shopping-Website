@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import API from '../api';  // This should be correctly configured
+import API from '../api'; // Ensure this is set up properly
 import '../assets/css/Login.css';
 import Logo from '../assets/images/lgo.png';
 
@@ -12,17 +12,20 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form data:', form);
-    setError('');
+    setError(''); // Reset error before submitting
+
     try {
+      // Send request to login API
       const res = await API.post('/auth/login', form, {
         headers: { 'Content-Type': 'application/json' }
       });
 
       console.log('Login response:', res.data);
 
-      if (res.data.token && res.data.user && res.data.user.username) {
+      if (res.data.token && res.data.user) {
         // Store user object (including token) in localStorage
         localStorage.setItem('user', JSON.stringify(res.data));
+        // Redirect to user's page
         navigate(`/shop/${res.data.user.username}`);
         setTimeout(() => {
           window.location.reload();
@@ -31,8 +34,13 @@ const Login = () => {
         setError('Login failed. Missing user data.');
       }
     } catch (err) {
-      setError('Login failed. Please check your credentials.');
-      console.error('Error response:', err.response);
+      // Improved error handling
+      if (err.response) {
+        setError(err.response.data.message || 'Login failed. Please check your credentials.');
+      } else {
+        setError('An unexpected error occurred.');
+      }
+      console.error('Error response:', err.response || err.message);
     }
   };
 

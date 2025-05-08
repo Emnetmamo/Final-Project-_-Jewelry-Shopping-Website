@@ -53,7 +53,8 @@ exports.signup = async (req, res) => {
         JWT_SECRET,   
         { expiresIn: '1d' } 
       );
-
+  
+      // Respond with user data and token
       res.status(200).json({
         message: 'Login successful',
         user: {
