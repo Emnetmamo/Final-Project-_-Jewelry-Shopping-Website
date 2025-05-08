@@ -32,7 +32,14 @@ const Shop = () => {
 
   const handleSendOrder = async () => {
     if (cartItems.length === 0) return;
-
+  
+   
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.token) {
+      alert('You need to log in first!');
+      return;
+    }
+  
     try {
       const response = await API.post('/orders/addOrder', {
         items: cartItems.map(item => ({
@@ -41,7 +48,7 @@ const Shop = () => {
           quantity: item.quantity || 1,
         })),
       });
-
+  
       alert(response.data.message);
       setCartItems([]);
     } catch (err) {
@@ -49,6 +56,7 @@ const Shop = () => {
       alert('Failed to send order.');
     }
   };
+  
 
   return (
     <div className="shop-page">
