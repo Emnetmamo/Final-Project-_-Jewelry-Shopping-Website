@@ -1,33 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const serverless = require('serverless-http');
-const connectDB = require('../config'); 
-const authRoutes = require('../routes/authRoutes');
-const orderRoutes = require('../routes/orderRoutes');
 
-dotenv.config();
+
+const MONGO_URI = 'mongodb+srv://Mentalist:Jane1234@cluster0.mwjjyjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 const app = express();
 
-const initializeDB = async () => {
+// DB connect
+const connectDB = async () => {
+  if (mongoose.connection.readyState === 1) return; // already connected
   try {
-    console.log("Attempting to connect to MongoDB...");
-    await connectDB();
+    console.log('Connecting to MongoDB...');
+    await mongoose.connect(MONGO_URI);
+    console.log('MongoDB connected successfully.');
   } catch (err) {
-    console.error('Error during MongoDB initialization:', err);
-    throw new Error('MongoDB initialization failed');
+    console.error('MongoDB connection failed:', err);
+    throw err;
   }
 };
-
-
-initializeDB()
-  .then(() => {
-    console.log("MongoDB initialized successfully.");
-  })
-  .catch((err) => {
-    console.error("Error initializing MongoDB:", err);
-  });
 
 app.use(
   cors({
@@ -39,15 +31,19 @@ app.use(
 
 app.use(express.json());
 
+// Basic test route
 app.get('/', async (req, res) => {
   try {
     await connectDB();
-    res.send('Hello, MongoDB connected successfully on request!');
-  } catch (error) {
-    res.status(500).send('MongoDB connection failed.');
+    res.status(200).send('MongoDB connected and server is live!');
+  } catch (err) {
+    res.status(500).send('Failed to connect to MongoDB.');
   }
 });
 
+// Routes
+const authRoutes = require('../routes/authRoutes');
+const orderRoutes = require('../routes/orderRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
