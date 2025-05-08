@@ -27,35 +27,36 @@ exports.signup = async (req, res) => {
   
 
   // User Login
-exports.login = async (req, res) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    return res.status(400).json({ message: 'Missing username or password' });
-  }
-
-  try {
-    // Find user by username
-    const user = await User.findOne({ username });
-    if (!user) {
-      console.log("== USER NOT FOUND ==");
-      return res.status(400).json({ message: 'Invalid credentials' });
+  exports.login = async (req, res) => {
+    const { username, password } = req.body;
+  
+    if (!username || !password) {
+      return res.status(400).json({ message: 'Missing username or password' });
     }
-
-    // Check if password matches
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      console.log("== PASSWORD MISMATCH ==");
-      return res.status(400).json({ message: 'Invalid credentials' });
+  
+    try {
+      // Find user by username
+      const user = await User.findOne({ username });
+      if (!user) {
+        console.log("== USER NOT FOUND ==");
+        return res.status(400).json({ message: 'Invalid credentials' });
+      }
+  
+      // Check if password matches
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        console.log("== PASSWORD MISMATCH ==");
+        return res.status(400).json({ message: 'Invalid credentials' });
+      }
+  
+      // Create JWT token
+      const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1d' });
+  
+      // Return the token and user details
+      return res.json({ token, user: { id: user._id, username: user.username } });
+    } catch (err) {
+      console.error("== SERVER ERROR ==", err);  // Log the entire error
+      return res.status(500).json({ message: 'Server error', error: err.message });  // Include error message
     }
-
-    // Create JWT token
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1d' });
-
-    // Return the token and user details
-    return res.json({ token, user: { id: user._id, username: user.username } });
-  } catch (err) {
-    console.error("== SERVER ERROR ==", err);
-    return res.status(500).json({ message: 'Server error' });
-  }
-};
+  };
+  
