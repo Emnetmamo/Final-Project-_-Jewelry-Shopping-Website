@@ -39,9 +39,15 @@ app.use(
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello, deployed successfully!');
+app.get('/', async (req, res) => {
+  try {
+    await connectDB();
+    res.send('Hello, MongoDB connected successfully on request!');
+  } catch (error) {
+    res.status(500).send('MongoDB connection failed.');
+  }
 });
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
