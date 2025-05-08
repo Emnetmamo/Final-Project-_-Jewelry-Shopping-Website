@@ -31,7 +31,6 @@ exports.createOrUpdateOrder = async (req, res) => {
     const startOfDay = moment().startOf('day').toDate();
     const endOfDay = moment().endOf('day').toDate();
 
-
     let existingOrder = await Order.findOne({
       createdAt: { $gte: startOfDay, $lte: endOfDay },
       status: 'Pending',
@@ -39,7 +38,6 @@ exports.createOrUpdateOrder = async (req, res) => {
     });
 
     if (existingOrder) {
-
       existingOrder.items.push(...validatedItems);
       await existingOrder.save();
       return res.status(200).json({

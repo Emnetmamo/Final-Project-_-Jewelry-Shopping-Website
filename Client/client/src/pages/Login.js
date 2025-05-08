@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import API from '../api';
+import API from '../api';  // This should be correctly configured
 import '../assets/css/Login.css';
 import Logo from '../assets/images/lgo.png';
 
@@ -17,12 +17,13 @@ const Login = () => {
       const res = await API.post('/auth/login', form, {
         headers: { 'Content-Type': 'application/json' }
       });
-  
-      console.log('Login response:', res.data); 
-  
+
+      console.log('Login response:', res.data);
+
       if (res.data.token && res.data.user && res.data.user.username) {
-        localStorage.setItem('user', JSON.stringify(res.data)); 
-        navigate(`/shop/${res.data.user.username}`); 
+        // Store user object (including token) in localStorage
+        localStorage.setItem('user', JSON.stringify(res.data));
+        navigate(`/shop/${res.data.user.username}`);
         setTimeout(() => {
           window.location.reload();
         }, 1);
@@ -34,7 +35,7 @@ const Login = () => {
       console.error('Error response:', err.response);
     }
   };
-  
+
   return (
     <div className="login-page">
       <div className="login-left" />

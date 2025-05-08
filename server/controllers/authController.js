@@ -28,35 +28,43 @@ exports.signup = async (req, res) => {
 
   // User Login
   exports.login = async (req, res) => {
-    const { username, password } = req.body;
-  
-    if (!username || !password) {
-      return res.status(400).json({ message: 'Missing username or password' });
-    }
-  
     try {
-      // Find user by username
+      const { username, password } = req.body;
+  
+      if (!username || !password) {
+        return res.status(400).json({ message: 'Username and password are required' });
+      }
+  
+      // Find the user in the database by username
       const user = await User.findOne({ username });
       if (!user) {
-        console.log("== USER NOT FOUND ==");
-        return res.status(400).json({ message: 'Invalid credentials' });
+        return res.status(401).json({ message: 'Invalid credentials' });
       }
   
-      // Check if password matches
+      // Compare the provided password with the stored hash
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        console.log("== PASSWORD MISMATCH ==");
-        return res.status(400).json({ message: 'Invalid credentials' });
+        return res.status(401).json({ message: 'Invalid credentials' });
       }
   
-      // Create JWT token
-      const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1d' });
-  
-      // Return the token and user details
-      return res.json({ token, user: { id: user._id, username: user.username } });
+      // Generate a JWT token
+      const token = jwt.sign(
+        { id: user._id },  
+        JWT_SECRET,   
+        { expiresIn: '1d' } 
+      );
+
+      res.status(200).json({
+        message: 'Login successful',
+        user: {
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+        },
+        token,  
+      });
     } catch (err) {
-      console.error("== SERVER ERROR ==", err);  // Log the entire error
-      return res.status(500).json({ message: 'Server error', error: err.message });  // Include error message
+      console.error('Login error:', err);
+      return res.status(500).json({ message: 'Server error', error: err.message });
     }
   };
-  

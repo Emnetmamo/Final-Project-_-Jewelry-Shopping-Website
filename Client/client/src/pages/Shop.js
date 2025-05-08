@@ -33,7 +33,7 @@ const Shop = () => {
   const handleSendOrder = async () => {
     if (cartItems.length === 0) return;
   
-   
+    // Check if the user is logged in and get the user ID from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user || !user.token) {
       alert('You need to log in first!');
@@ -42,6 +42,7 @@ const Shop = () => {
   
     try {
       const response = await API.post('/orders/addOrder', {
+        userId: user.user.id,  // Pass the user ID here
         items: cartItems.map(item => ({
           name: item.name,
           price: item.price,
