@@ -4,18 +4,23 @@ let isConnected = false;
 
 const connectDB = async () => {
   if (isConnected) {
-    return;
+    console.log("Reusing MongoDB connection");
+    return; 
   }
 
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
+    const options = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    });
+      useCreateIndex: true,
+      useFindAndModify: false,
+    };
+
+    await mongoose.createConnection(process.env.MONGO_URI, options);
     isConnected = true;
-    console.log('MongoDB connected');
+    console.log("MongoDB connected successfully");
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    console.error('MongoDB connection failed:', error);
     throw new Error('MongoDB connection failed');
   }
 };

@@ -10,7 +10,24 @@ dotenv.config();
 
 const app = express();
 
-connectDB();
+const initializeDB = async () => {
+  try {
+    console.log("Attempting to connect to MongoDB...");
+    await connectDB();
+  } catch (err) {
+    console.error('Error during MongoDB initialization:', err);
+    throw new Error('MongoDB initialization failed');
+  }
+};
+
+
+initializeDB()
+  .then(() => {
+    console.log("MongoDB initialized successfully.");
+  })
+  .catch((err) => {
+    console.error("Error initializing MongoDB:", err);
+  });
 
 app.use(
   cors({
