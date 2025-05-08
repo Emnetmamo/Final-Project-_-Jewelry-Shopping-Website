@@ -1,19 +1,14 @@
-// server.js
-
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const serverless = require('serverless-http');
 const authRoutes = require('../routes/authRoutes');
 const orderRoutes = require('../routes/orderRoutes');
 
-dotenv.config();
-
 const app = express();
 
-// MongoDB URI from environment variables
-const MONGO_URI = process.env.MONGO_URI;
+// MongoDB URI directly provided (no need for dotenv)
+const MONGO_URI = 'mongodb+srv://Mentalist:Jane1234@cluster0.mwjjyjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Function to connect to MongoDB with retry logic
 const connectDB = async (attempts = 5) => {
