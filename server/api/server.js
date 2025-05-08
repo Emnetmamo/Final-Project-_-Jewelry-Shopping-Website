@@ -1,15 +1,16 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const connectDB = require('./config');
+const connectDB = require('../config');
 
 dotenv.config();
 connectDB();
 
-const authRoutes = require('./routes/authRoutes');
-const orderRoutes = require('./routes/orderRoutes');
+const authRoutes = require('../routes/authRoutes');
+const orderRoutes = require('../routes/orderRoutes');
 
 const app = express();
+
 app.use(
   cors({
     origin: ["https://nomads-jewelry-shopping-website-front.vercel.app"],
@@ -23,12 +24,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 
-// Hello route for testing deployment
 app.get('/', (req, res) => {
-  res.send('Hello there, deployed successfully!');
+  res.send('Hello, deployed successfully!');
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Export Express app wrapped in a handler for Vercel
+const serverless = require('serverless-http');
+module.exports = serverless(app);
