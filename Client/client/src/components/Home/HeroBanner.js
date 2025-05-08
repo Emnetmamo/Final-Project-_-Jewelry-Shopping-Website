@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../assets/css/Home/HeroBanner.css';
-import jawn from '../../assets/videos/MyJawn.mp4';
+import jawn from '../../assets/videos/MyJawn (1).mp4';
 const HeroBanner = () => {
     const [showText, setShowText] = useState(false);
   
