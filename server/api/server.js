@@ -1,3 +1,5 @@
+// server.js
+
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -7,7 +9,7 @@ const orderRoutes = require('../routes/orderRoutes');
 
 const app = express();
 
-// MongoDB URI directly provided (no need for dotenv)
+// MongoDB URI directly as a string
 const MONGO_URI = 'mongodb+srv://Mentalist:Jane1234@cluster0.mwjjyjv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 // Function to connect to MongoDB with retry logic
@@ -17,8 +19,9 @@ const connectDB = async (attempts = 5) => {
     try {
       console.log('Attempting to connect to MongoDB...');
       await mongoose.connect(MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        useNewUrlParser: true,   // Optional, remove deprecated options
+        useUnifiedTopology: true, // Optional, remove deprecated options
+        serverSelectionTimeoutMS: 5000, // Timeout for server connection (5 seconds)
       });
       console.log('MongoDB connected successfully.');
       return;
@@ -27,7 +30,7 @@ const connectDB = async (attempts = 5) => {
       lastError = error;
       if (i < attempts - 1) {
         console.log('Retrying...');
-        await new Promise(resolve => setTimeout(resolve, 5000)); // wait for 5 seconds before retry
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Wait for 5 seconds before retry
       }
     }
   }
